@@ -1,0 +1,126 @@
+{
+    "_comment": "TEMPLATE FILE: Edit this file, not the generated launch.json",
+    "_comment": "This file is AUTO-GENERATED from launch.json.in during CMake configure",
+    "_comment": "Do NOT edit launch.json directly - edit THIS file instead",
+    "_comment": "Generated launch.json is ignored by Git (.gitignore) - this template is tracked",
+    "_comment": "vulkanExamples placeholders are replaced with actual project name from CMakeLists.txt",
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Debug Triangle Example",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/build/triangle.exe",
+            "args": [],
+            "cwd": "${workspaceFolder}",
+            "stopAtEntry": false,
+            "externalConsole": true,
+            "environment": [
+                {
+                    "name": "VULKAN_SDK",
+                    "value": "C:\\VulkanSDK\\1.4.321.1"
+                },
+                {
+                    "name": "PATH",
+                    "value": "C:\\VulkanSDK\\1.4.321.1\\Bin;${env:PATH}"
+                }
+            ],
+            "MIMode": "gdb",
+            "miDebuggerPath": "gdb.exe",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ]
+        },
+        {
+            "name": "Debug PBR Basic Example",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/build/pbrbasic.exe",
+            "args": [],
+            "cwd": "${workspaceFolder}",
+            "stopAtEntry": false,
+            "externalConsole": true,
+            "environment": [
+                {
+                    "name": "VULKAN_SDK",
+                    "value": "C:\\VulkanSDK\\1.4.321.1"
+                },
+                {
+                    "name": "PATH",
+                    "value": "C:\\VulkanSDK\\1.4.321.1\\Bin;${env:PATH}"
+                }
+            ],
+            "MIMode": "gdb",
+            "miDebuggerPath": "gdb.exe",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ]
+        },
+        {
+            "name": "Debug Texture Example",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/build/texture.exe",
+            "args": [],
+            "cwd": "${workspaceFolder}",
+            "stopAtEntry": false,
+            "externalConsole": true,
+            "environment": [
+                {
+                    "name": "VULKAN_SDK",
+                    "value": "C:\\VulkanSDK\\1.4.321.1"
+                },
+                {
+                    "name": "PATH",
+                    "value": "C:\\VulkanSDK\\1.4.321.1\\Bin;${env:PATH}"
+                }
+            ],
+            "MIMode": "gdb",
+            "miDebuggerPath": "gdb.exe",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ]
+        },
+        {
+            "name": "Debug Compute Shader Example",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/build/computeshader.exe",
+            "args": [],
+            "cwd": "${workspaceFolder}",
+            "stopAtEntry": false,
+            "externalConsole": true,
+            "environment": [
+                {
+                    "name": "VULKAN_SDK",
+                    "value": "C:\\VulkanSDK\\1.4.321.1"
+                },
+                {
+                    "name": "PATH",
+                    "value": "C:\\VulkanSDK\\1.4.321.1\\Bin;${env:PATH}"
+                }
+            ],
+            "MIMode": "gdb",
+            "miDebuggerPath": "gdb.exe",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ]
+        }
+    ]
+}

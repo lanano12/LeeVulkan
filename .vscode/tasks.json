@@ -1,0 +1,209 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "cmake-clean",
+            "type": "shell",
+            "command": "powershell",
+            "args": ["-Command", "if (Test-Path build) { Remove-Item -Recurse -Force build\\CMakeCache.txt, build\\CMakeFiles }"],
+            "presentation": {
+                "echo": true,
+                "reveal": "silent",
+                "focus": false,
+                "panel": "shared"
+            }
+        },
+        {
+            "label": "cmake-clean-all",
+            "type": "shell",
+            "command": "powershell",
+            "args": ["-Command", "if (Test-Path build) { Remove-Item -Recurse -Force build }"],
+            "presentation": {
+                "echo": true,
+                "reveal": "silent",
+                "focus": false,
+                "panel": "shared"
+            }
+        },
+        {
+            "label": "cmake-build",
+            "type": "shell",
+            "command": "cmake",
+            "args": ["-B", "build", "-S", ".", "-G", "Ninja"],
+            "options": {
+                "env": {
+                    "VULKAN_SDK": "C:\\VulkanSDK\\1.4.321.1",
+                    "PATH": "C:\\VulkanSDK\\1.4.321.1\\Bin;${env:PATH}"
+                }
+            },
+            "dependsOn": ["cmake-clean"]
+        },
+        {
+            "label": "cmake-build-release",
+            "type": "shell",
+            "command": "cmake",
+            "args": ["-B", "build", "-S", ".", "-G", "Ninja", "-DCMAKE_BUILD_TYPE=Release"],
+            "options": {
+                "env": {
+                    "VULKAN_SDK": "C:\\VulkanSDK\\1.4.321.1",
+                    "PATH": "C:\\VulkanSDK\\1.4.321.1\\Bin;${env:PATH}"
+                }
+            },
+            "dependsOn": ["cmake-clean"]
+        },
+        {
+            "label": "build-audit",
+            "type": "shell",
+            "command": "powershell",
+            "args": ["-ExecutionPolicy", "Bypass", "-File", ".vscode/generate-build-audit.ps1"],
+            "presentation": {
+                "echo": true,
+                "reveal": "silent",
+                "focus": false,
+                "panel": "shared"
+            }
+        },
+        {
+            "label": "regenerate-launch-json",
+            "type": "shell",
+            "command": "powershell",
+            "args": ["-ExecutionPolicy", "Bypass", "-Command", "cmake -B build -S . -G Ninja"],
+            "presentation": {
+                "echo": true,
+                "reveal": "silent",
+                "focus": false,
+                "panel": "shared"
+            }
+        },
+        {
+            "label": "update-launch-executable",
+            "type": "shell",
+            "command": "powershell",
+            "args": ["-ExecutionPolicy", "Bypass", "-File", ".vscode/update-launch-executable.ps1"],
+            "presentation": {
+                "echo": true,
+                "reveal": "silent",
+                "focus": false,
+                "panel": "shared"
+            }
+        },
+        {
+            "label": "build-and-test",
+            "type": "shell",
+            "command": "powershell",
+            "args": ["-ExecutionPolicy", "Bypass", "-File", "build_and_test.ps1", "-NoPause", "-Verbose"],
+            "group": "build",
+            "dependsOn": ["cmake-build", "build-audit"],
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": true,
+                "panel": "shared",
+                "showReuseMessage": false
+            },
+            "problemMatcher": ["$gcc"],
+            "detail": "Build project and run all tests with detailed logging"
+        },
+        {
+            "label": "build-and-test-verbose",
+            "type": "shell",
+            "command": "powershell",
+            "args": ["-ExecutionPolicy", "Bypass", "-File", "build_and_test.ps1", "-NoPause", "-Verbose"],
+            "group": "build",
+            "dependsOn": ["cmake-build", "build-audit"],
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": true,
+                "panel": "shared",
+                "clear": true,
+                "showReuseMessage": false
+            },
+            "problemMatcher": ["$gcc"],
+            "detail": "Build project and run tests with FULL Qt Test output"
+        },
+        {
+            "label": "build-debug",
+            "type": "shell",
+            "command": "powershell",
+            "args": ["-ExecutionPolicy", "Bypass", "-File", "build_and_test.ps1", "-NoPause", "-Verbose", "-BuildType", "Debug"],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared"
+            },
+            "problemMatcher": ["$gcc"],
+            "detail": "Build project in Debug mode"
+        },
+        {
+            "label": "build-release",
+            "type": "shell",
+            "command": "powershell",
+            "args": ["-ExecutionPolicy", "Bypass", "-File", "build_and_test.ps1", "-NoPause", "-Verbose", "-BuildType", "Release"],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared"
+            },
+            "problemMatcher": ["$gcc"],
+            "detail": "Build project in Release mode"
+        },
+        {
+            "label": "test-only",
+            "type": "shell",
+            "command": "powershell",
+            "args": ["-ExecutionPolicy", "Bypass", "-File", "build_and_test.ps1", "-TestOnly", "-NoPause"],
+            "group": "test",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared"
+            },
+            "detail": "Run tests without rebuilding"
+        },
+        {
+            "label": "clean-build",
+            "type": "shell",
+            "command": "powershell",
+            "args": ["-ExecutionPolicy", "Bypass", "-File", "build_and_test.ps1", "-CleanOnly", "-NoPause"],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared"
+            },
+            "detail": "Clean build directory"
+        },
+        {
+            "label": "build-and-test-batch",
+            "type": "shell",
+            "command": "cmd",
+            "args": ["/c", "build_and_test.bat"],
+            "group": "build",
+            "dependsOn": ["cmake-build", "build-audit"],
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": true,
+                "panel": "shared",
+                "showReuseMessage": false
+            },
+            "problemMatcher": ["$gcc"],
+            "detail": "Build project and run all tests using batch script"
+        },
+        {
+            "label": "cmake-compile",
+            "type": "shell",
+            "command": "cmake",
+            "args": ["--build", "build"],
+            "group": { "kind": "build", "isDefault": true },
+            "dependsOn": ["cmake-build", "build-audit"]   // 👈 ensures configure and audit run first
+        }
+    ]
+}

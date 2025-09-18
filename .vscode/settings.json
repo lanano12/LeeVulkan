@@ -1,0 +1,12 @@
+{
+    "cmake.configureArgs": [
+        "-DVULKAN_SDK=C:\\VulkanSDK\\1.4.321.1"
+    ],
+    "cmake.environment": {
+        "VULKAN_SDK": "C:\\VulkanSDK\\1.4.321.1",
+        "PATH": "C:\\VulkanSDK\\1.4.321.1\\Bin;${env:PATH}"
+    },
+    "cmake.generator": "Ninja",
+    "cmake.buildDirectory": "${workspaceFolder}/build",
+    "C_Cpp.default.configurationProvider": "ms-vscode.cmake-tools"
+}
